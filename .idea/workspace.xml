@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0a5306cf-f018-4d12-8b8b-59ba621c9d51" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="carannouncements" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProjectId" id="1PMdBLwPSjNZMStiqWI0ixhnTJj" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/GitHubDesktop.exe" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="by.novitsky.carannouncements.dao" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.CarDAOTest.deleteCar">
+    <configuration name="CarDAOTest.createCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carannouncements.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.novitsky.carannouncements.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.novitsky.carannouncements.dao" />
+      <option name="MAIN_CLASS_NAME" value="by.novitsky.carannouncements.dao.CarDAOTest" />
+      <option name="METHOD_NAME" value="createCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarDAOTest.deleteCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carannouncements.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.novitsky.carannouncements.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.novitsky.carannouncements.dao" />
+      <option name="MAIN_CLASS_NAME" value="by.novitsky.carannouncements.dao.CarDAOTest" />
+      <option name="METHOD_NAME" value="deleteCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarDAOTest.getAllCars" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carannouncements.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.novitsky.carannouncements.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.novitsky.carannouncements.dao" />
+      <option name="MAIN_CLASS_NAME" value="by.novitsky.carannouncements.dao.CarDAOTest" />
+      <option name="METHOD_NAME" value="getAllCars" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarDAOTest.updateCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carannouncements.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.novitsky.carannouncements.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.novitsky.carannouncements.dao" />
+      <option name="MAIN_CLASS_NAME" value="by.novitsky.carannouncements.dao.CarDAOTest" />
+      <option name="METHOD_NAME" value="updateCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDAOTest.getAllUsersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carannouncements.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.novitsky.carannouncements.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.novitsky.carannouncements.dao" />
+      <option name="MAIN_CLASS_NAME" value="by.novitsky.carannouncements.dao.UserDAOTest" />
+      <option name="METHOD_NAME" value="getAllUsersTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CarDAOTest.deleteCar" />
+        <item itemvalue="JUnit.CarDAOTest.createCar" />
+        <item itemvalue="JUnit.CarDAOTest.updateCar" />
+        <item itemvalue="JUnit.CarDAOTest.getAllCars" />
+        <item itemvalue="JUnit.UserDAOTest.getAllUsersTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a5306cf-f018-4d12-8b8b-59ba621c9d51" name="Default Changelist" comment="" />
+      <created>1565687762367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565687762367</updated>
+      <workItem from="1565687766036" duration="16856000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
