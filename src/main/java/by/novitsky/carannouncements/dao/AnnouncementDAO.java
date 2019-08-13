@@ -15,29 +15,6 @@ public class AnnouncementDAO {
     private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ? WHERE id = ?";
     private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed) VALUES (?,?,?)";
 
-
-    public List<Announcement> getAllAnnouncements(int carID, String sqlQuery){
-        ArrayList<Announcement> result = new ArrayList<>();
-
-        try(Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(GET_ALL_ANNOUNCEMENTS_SQL_COMMAND + carID)){
-
-            while(rs.next()){
-                Announcement temp = new Announcement();
-                temp.setId(rs.getInt("id"));
-                temp.setCarID(rs.getInt("car_id"));
-                temp.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
-                temp.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
-                result.add(temp);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
     public List<Announcement> getAllAnnouncements(int carID){
         ArrayList<Announcement> result = new ArrayList<>();
 
@@ -91,7 +68,7 @@ public class AnnouncementDAO {
     public boolean updateAnnouncement(Announcement announcement){
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
-            statement.setDate(1, java.sql.Date.valueOf(LocalDateTime.now().toLocalDate()));
+            statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.setInt(2, announcement.getId());
             statement.execute();
             return true;
@@ -105,8 +82,8 @@ public class AnnouncementDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL_COMMAND)) {
             statement.setInt(1, announcement.getCarID());
-            statement.setDate(2, java.sql.Date.valueOf(LocalDateTime.now().toLocalDate()));
-            statement.setDate(3, java.sql.Date.valueOf(LocalDateTime.now().toLocalDate()));
+            statement.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+            statement.setTimestamp(3, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.execute();
             return true;
         } catch (SQLException e) {

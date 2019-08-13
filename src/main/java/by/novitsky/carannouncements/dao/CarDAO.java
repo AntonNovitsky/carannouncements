@@ -1,5 +1,6 @@
 package by.novitsky.carannouncements.dao;
 
+import by.novitsky.carannouncements.entity.Announcement;
 import by.novitsky.carannouncements.entity.Car;
 import by.novitsky.carannouncements.entity.Condition;
 
@@ -81,6 +82,9 @@ public class CarDAO {
             statement.setInt(7, car.getEnginePower());
             statement.setInt(8, car.getId());
             statement.execute();
+            AnnouncementDAO announcementDAO = new AnnouncementDAO();
+            List<Announcement> announcements = announcementDAO.getAllAnnouncements(car.getId());
+            announcements.stream().forEach((x) -> announcementDAO.updateAnnouncement(x));
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,5 +110,4 @@ public class CarDAO {
         }
         return false;
     }
-
 }
