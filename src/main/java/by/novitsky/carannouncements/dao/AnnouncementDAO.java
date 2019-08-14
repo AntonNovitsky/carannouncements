@@ -13,8 +13,8 @@ public class AnnouncementDAO {
     private static final String GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND = "SELECT * FROM announcement WHERE car_id =";
     private static final String GET_ANNOUNCEMENTS_BY_ID_SQL_COMMAND = "SELECT * FROM announcement WHERE id =";
     private static final String DELETE_ANNOUNCEMENT_BY_ID_SQL_COMMAND = "DELETE FROM announcement WHERE id =";
-    private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ? WHERE id = ?";
-    private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed) VALUES (?,?,?)";
+    private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ?, is_active = ? WHERE id = ?";
+    private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed, is_active) VALUES (?,?,?,?)";
 
 
     public List<Announcement> getAllAnnouncements(){
@@ -29,6 +29,7 @@ public class AnnouncementDAO {
                 temp.setCarID(rs.getInt("car_id"));
                 temp.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
                 temp.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
+                temp.setActive(rs.getBoolean("is_active"));
                 result.add(temp);
             }
 
@@ -52,6 +53,7 @@ public class AnnouncementDAO {
                 temp.setCarID(rs.getInt("car_id"));
                 temp.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
                 temp.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
+                temp.setActive(rs.getBoolean("is_active"));
                 result.add(temp);
             }
 
@@ -71,6 +73,7 @@ public class AnnouncementDAO {
                 result.setCarID(rs.getInt("car_id"));
                 result.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
                 result.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
+                result.setActive(rs.getBoolean("is_active"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,7 +96,8 @@ public class AnnouncementDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
             statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
-            statement.setInt(2, announcement.getId());
+            statement.setBoolean(2, announcement.isActive());
+            statement.setInt(3, announcement.getId());
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -108,6 +112,7 @@ public class AnnouncementDAO {
             statement.setInt(1, announcement.getCarID());
             statement.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.setTimestamp(3, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+            statement.setBoolean(4, announcement.isActive());
             statement.execute();
             return true;
         } catch (SQLException e) {

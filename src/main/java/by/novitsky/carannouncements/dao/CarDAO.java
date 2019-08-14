@@ -15,7 +15,8 @@ public class CarDAO {
     private static final String DELETE_CAR_BY_ID_SQL_COMMAND = "DELETE FROM car WHERE id = ";
     private static final String CHANGE_CAR_SQL_COMMAND
             = "UPDATE car SET year_of_production = ?, brand = ?, model = ?, engine_capacity = ?, condition = ?, mileage = ?, engine_power= ? WHERE id = ?";
-    private static final String CREATE_CAR_SQL_COMMAND = "INSERT INTO car (year_of_production, brand, model, engine_capacity, condition, mileage, engine_power, user_id) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String CREATE_CAR_SQL_COMMAND
+        = "INSERT INTO car (year_of_production, brand, model, engine_capacity, condition, mileage, engine_power, user_id) VALUES (?,?,?,?,?,?,?,?)";
 
 
     public List<Car> getAllUserCars(int userID){
@@ -84,7 +85,7 @@ public class CarDAO {
             statement.execute();
             AnnouncementDAO announcementDAO = new AnnouncementDAO();
             List<Announcement> announcements = announcementDAO.getAllAnnouncements(car.getId());
-            announcements.stream().forEach((x) -> announcementDAO.updateAnnouncement(x));
+            announcements.forEach((x) -> announcementDAO.updateAnnouncement(x));
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

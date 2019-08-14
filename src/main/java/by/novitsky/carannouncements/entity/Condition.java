@@ -4,6 +4,6 @@ public enum Condition {
 
     NEW,
     USED,
-    CRASHED;
+    CRASHED
 
 }

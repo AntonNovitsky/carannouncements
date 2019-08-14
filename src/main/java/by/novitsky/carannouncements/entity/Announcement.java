@@ -8,6 +8,7 @@ public class Announcement {
     private int carID;
     private LocalDateTime dateCreated;
     private LocalDateTime dateLastChanged;
+    private boolean isActive;
 
     public int getId() {
         return id;
@@ -41,6 +42,14 @@ public class Announcement {
         this.dateLastChanged = dateLastChanged;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public String toString() {
         return "Announcement{" +
@@ -48,6 +57,7 @@ public class Announcement {
                 ", carID=" + carID +
                 ", dateCreated=" + dateCreated +
                 ", dateLastChanged=" + dateLastChanged +
+                ", isActive=" + isActive +
                 '}';
     }
 }
