@@ -9,18 +9,42 @@ import java.util.List;
 
 public class AnnouncementDAO {
 
-    private static final String GET_ALL_ANNOUNCEMENTS_SQL_COMMAND = "SELECT * FROM announcement WHERE car_id =";
+    private static final String GET_ALL_ANNOUNCEMENTS_SQL_COMMAND = "SELECT * FROM announcement";
+    private static final String GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND = "SELECT * FROM announcement WHERE car_id =";
     private static final String GET_ANNOUNCEMENTS_BY_ID_SQL_COMMAND = "SELECT * FROM announcement WHERE id =";
     private static final String DELETE_ANNOUNCEMENT_BY_ID_SQL_COMMAND = "DELETE FROM announcement WHERE id =";
     private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ? WHERE id = ?";
     private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed) VALUES (?,?,?)";
+
+
+    public List<Announcement> getAllAnnouncements(){
+        ArrayList<Announcement> result = new ArrayList<>();
+
+        try(Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(GET_ALL_ANNOUNCEMENTS_SQL_COMMAND)){
+            while(rs.next()){
+                Announcement temp = new Announcement();
+                temp.setId(rs.getInt("id"));
+                temp.setCarID(rs.getInt("car_id"));
+                temp.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
+                temp.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
+                result.add(temp);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     public List<Announcement> getAllAnnouncements(int carID){
         ArrayList<Announcement> result = new ArrayList<>();
 
         try(Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(GET_ALL_ANNOUNCEMENTS_SQL_COMMAND + carID)){
+            ResultSet rs = statement.executeQuery(GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND + carID)){
 
             while(rs.next()){
                 Announcement temp = new Announcement();
