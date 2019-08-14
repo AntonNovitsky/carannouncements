@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a5306cf-f018-4d12-8b8b-59ba621c9d51" name="Default Changelist" comment="Primitive field types changed to">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/dao/AnnouncementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/dao/AnnouncementDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/service/DeleteAnnouncement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/service/DeleteAnnouncement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/servlet/ProjectServletContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/servlet/ProjectServletContextListener.java" afterDir="false" />
+    <list default="true" id="0a5306cf-f018-4d12-8b8b-59ba621c9d51" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -476,7 +460,7 @@
       <option name="presentableId" value="Default" />
       <updated>1565687762367</updated>
       <workItem from="1565687766036" duration="21202000" />
-      <workItem from="1565763024178" duration="29920000" />
+      <workItem from="1565763024178" duration="30291000" />
     </task>
     <task id="LOCAL-00001" summary="Changed incorrect time format conversion from database (java.sql.Date to java.sql.Timestamp)">
       <created>1565708795164</created>
@@ -534,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565787226027</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Servlet controller development friezed">
+      <created>1565795701093</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1565795701093</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +583,8 @@
     <MESSAGE value="PostgreSQL driver is now loaded from ServletContextListener on startup" />
     <MESSAGE value="Deleted bug on context loading" />
     <MESSAGE value="Primitive field types changed to wrapper classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primitive field types changed to wrapper classes" />
+    <MESSAGE value="Servlet controller development friezed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Servlet controller development friezed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -604,11 +596,6 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/by/novitsky/carannouncements/servlet/ProjectServletContextListener.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
