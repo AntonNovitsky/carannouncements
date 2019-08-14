@@ -4,38 +4,38 @@ import java.util.List;
 
 public class Car {
 
-    private int id;
-    private int userID;
-    private int yearOfProduction;
+    private Integer id;
+    private Integer userID;
+    private Integer yearOfProduction;
     private String brand;
     private String model;
-    private int engineCapacity;
+    private Integer engineCapacity;
     private Condition condition;
-    private int mileage;
-    private int enginePower;
+    private Integer mileage;
+    private Integer enginePower;
     private List<Announcement> announcementList;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public int getYearOfProduction() {
+    public Integer getYearOfProduction() {
         return yearOfProduction;
     }
 
-    public void setYearOfProduction(int yearOfProduction) {
+    public void setYearOfProduction(Integer yearOfProduction) {
         this.yearOfProduction = yearOfProduction;
     }
 
@@ -55,11 +55,11 @@ public class Car {
         this.model = model;
     }
 
-    public int getEngineCapacity() {
+    public Integer getEngineCapacity() {
         return engineCapacity;
     }
 
-    public void setEngineCapacity(int engineCapacity) {
+    public void setEngineCapacity(Integer engineCapacity) {
         this.engineCapacity = engineCapacity;
     }
 
@@ -71,19 +71,19 @@ public class Car {
         this.condition = condition;
     }
 
-    public int getMileage() {
+    public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
 
-    public int getEnginePower() {
+    public Integer getEnginePower() {
         return enginePower;
     }
 
-    public void setEnginePower(int enginePower) {
+    public void setEnginePower(Integer enginePower) {
         this.enginePower = enginePower;
     }
 

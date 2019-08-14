@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 
 public class Announcement {
 
-    private int id;
-    private int carID;
+    private Integer id;
+    private Integer carID;
     private LocalDateTime dateCreated;
     private LocalDateTime dateLastChanged;
-    private boolean isActive;
+    private Boolean isActive;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getCarID() {
+    public Integer getCarID() {
         return carID;
     }
 
-    public void setCarID(int carID) {
+    public void setCarID(Integer carID) {
         this.carID = carID;
     }
 
@@ -42,11 +42,11 @@ public class Announcement {
         this.dateLastChanged = dateLastChanged;
     }
 
-    public boolean isActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 

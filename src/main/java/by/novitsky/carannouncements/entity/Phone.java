@@ -2,23 +2,23 @@ package by.novitsky.carannouncements.entity;
 
 public class Phone {
 
-    private int id;
-    private int userID;
+    private Integer id;
+    private Integer userID;
     private String number;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 

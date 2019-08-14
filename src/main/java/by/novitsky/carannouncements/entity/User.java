@@ -4,16 +4,16 @@ import java.util.List;
 
 public class User {
 
-    private int id;
+    private Integer id;
     private String name;
     private List<Phone> phones;
     private List<Car> cars;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
