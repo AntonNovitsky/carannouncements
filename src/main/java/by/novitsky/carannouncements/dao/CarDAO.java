@@ -20,11 +20,6 @@ public class CarDAO {
 
 
     public CarDAO(){
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Car> getAllUserCars(int userID){

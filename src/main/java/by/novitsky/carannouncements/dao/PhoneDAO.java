@@ -17,11 +17,6 @@ public class PhoneDAO {
 
 
     public PhoneDAO() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Phone> getUserPhones(int userID){

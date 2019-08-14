@@ -15,11 +15,6 @@ public class UserDAO {
     private static final String CHANGE_USER_SQL_COMMAND = "UPDATE car_user SET name = ? WHERE id = ?";
 
     public UserDAO(){
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<User> getAllUsers() {
@@ -35,10 +30,6 @@ public class UserDAO {
                 User tempUser = new User();
                 int id = rs.getInt("id");
                 result.add(this.getUser(id));
-                /*tempUser.setId(rs.getInt("id"));-
-                tempUser.setName(rs.getString("name"));
-                tempUser.setPhones(new PhoneDAO().getUserPhones(tempUser.getId()));
-                result.add(tempUser);*/
             }
         } catch (SQLException e) {
             e.printStackTrace();

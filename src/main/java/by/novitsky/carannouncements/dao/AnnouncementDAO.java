@@ -18,11 +18,6 @@ public class AnnouncementDAO {
 
 
     public AnnouncementDAO(){
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Announcement> getAllAnnouncements(){
