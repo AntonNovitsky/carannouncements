@@ -15,7 +15,11 @@ public class UserDAO {
     private static final String CHANGE_USER_SQL_COMMAND = "UPDATE car_user SET name = ? WHERE id = ?";
 
     public UserDAO(){
-
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<User> getAllUsers() {
@@ -24,6 +28,9 @@ public class UserDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_ALL_USERS_SQL_COMMAND)) {
+            if (!rs.isBeforeFirst() ) {
+                return null;
+            }
             while(rs.next()){
                 User tempUser = new User();
                 int id = rs.getInt("id");
@@ -44,12 +51,14 @@ public class UserDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_USER_BY_ID_SQL_COMMAND + id)) {
-            while(rs.next()){
-                result.setId(id);
-                result.setName(rs.getString("name"));
-                result.setPhones(new PhoneDAO().getUserPhones(id));
-                result.setCars(new CarDAO().getAllUserCars(id));
+            if (!rs.isBeforeFirst() ) {
+                return null;
             }
+            rs.next();
+            result.setId(id);
+            result.setName(rs.getString("name"));
+            result.setPhones(new PhoneDAO().getUserPhones(id));
+            result.setCars(new CarDAO().getAllUserCars(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -17,12 +17,23 @@ public class AnnouncementDAO {
     private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed, is_active) VALUES (?,?,?,?)";
 
 
+    public AnnouncementDAO(){
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Announcement> getAllAnnouncements(){
         ArrayList<Announcement> result = new ArrayList<>();
 
         try(Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(GET_ALL_ANNOUNCEMENTS_SQL_COMMAND)){
+            if (!rs.isBeforeFirst() ) {
+                return null;
+            }
             while(rs.next()){
                 Announcement temp = new Announcement();
                 temp.setId(rs.getInt("id"));
@@ -46,7 +57,9 @@ public class AnnouncementDAO {
         try(Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND + carID)){
-
+            if (!rs.isBeforeFirst() ) {
+                return null;
+            }
             while(rs.next()){
                 Announcement temp = new Announcement();
                 temp.setId(rs.getInt("id"));
@@ -68,13 +81,16 @@ public class AnnouncementDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_ANNOUNCEMENTS_BY_ID_SQL_COMMAND + id)) {
-            while(rs.next()){
-                result.setId(id);
-                result.setCarID(rs.getInt("car_id"));
-                result.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
-                result.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
-                result.setActive(rs.getBoolean("is_active"));
+            if (!rs.isBeforeFirst() ) {
+                return null;
             }
+            rs.next();
+            result.setId(id);
+            result.setCarID(rs.getInt("car_id"));
+            result.setDateLastChanged(rs.getTimestamp("date_last_changed").toLocalDateTime());
+            result.setDateCreated(rs.getTimestamp("date_created").toLocalDateTime());
+            result.setActive(rs.getBoolean("is_active"));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

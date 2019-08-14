@@ -19,12 +19,23 @@ public class CarDAO {
         = "INSERT INTO car (year_of_production, brand, model, engine_capacity, condition, mileage, engine_power, user_id) VALUES (?,?,?,?,?,?,?,?)";
 
 
+    public CarDAO(){
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Car> getAllUserCars(int userID){
         ArrayList<Car> result = new ArrayList<>();
 
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_ALL_USER_CARS_SQL_COMMAND + userID)) {
+            if (!rs.isBeforeFirst() ) {
+                return null;
+            }
             while(rs.next()){
                 Car temp = new Car();
                 int id = rs.getInt("id");
@@ -53,18 +64,21 @@ public class CarDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_CAR_BY_ID_SQL_COMMAND + id)) {
-            while(rs.next()){
-                result.setId(id);
-                result.setUserID(rs.getInt("user_id"));
-                result.setYearOfProduction(rs.getInt("year_of_production"));
-                result.setBrand(rs.getString("brand"));
-                result.setModel(rs.getString("model"));
-                result.setEngineCapacity(rs.getInt("engine_capacity"));
-                result.setCondition(Condition.valueOf(rs.getString("condition")));
-                result.setMileage(rs.getInt("mileage"));
-                result.setEnginePower(rs.getInt("engine_power"));
-                result.setAnnouncementList(new AnnouncementDAO().getAllAnnouncements(id));
+            if (!rs.isBeforeFirst() ) {
+                return null;
             }
+            rs.next();
+            result.setId(id);
+            result.setUserID(rs.getInt("user_id"));
+            result.setYearOfProduction(rs.getInt("year_of_production"));
+            result.setBrand(rs.getString("brand"));
+            result.setModel(rs.getString("model"));
+            result.setEngineCapacity(rs.getInt("engine_capacity"));
+            result.setCondition(Condition.valueOf(rs.getString("condition")));
+            result.setMileage(rs.getInt("mileage"));
+            result.setEnginePower(rs.getInt("engine_power"));
+            result.setAnnouncementList(new AnnouncementDAO().getAllAnnouncements(id));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

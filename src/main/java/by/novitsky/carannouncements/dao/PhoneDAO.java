@@ -15,12 +15,24 @@ public class PhoneDAO {
     private static final String CHANGE_PHONE_SQL_COMMAND = "UPDATE phone SET number = ? WHERE id = ?";
     private static final String CREATE_PHONE_SQL_COMMAND = "INSERT INTO phone (user_id, number) VALUES (?,?)";
 
+
+    public PhoneDAO() {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Phone> getUserPhones(int userID){
         List<Phone> result = new ArrayList<>();
 
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_USER_PHONES_SQL_COMMAND + userID)) {
+            if (!rs.isBeforeFirst() ) {
+                return null;
+            }
             while(rs.next()){
                 Phone temp = new Phone();
                 temp.setId(rs.getInt("id"));
@@ -39,11 +51,14 @@ public class PhoneDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(GET_PHONE_BY_ID_SQL_COMMAND + id)) {
-            while(rs.next()){
-                result.setId(id);
-                result.setNumber(rs.getString("number"));
-                result.setUserID(rs.getInt("user_id"));
+            if (!rs.isBeforeFirst() ) {
+                return null;
             }
+            rs.next();
+            result.setId(id);
+            result.setNumber(rs.getString("number"));
+            result.setUserID(rs.getInt("user_id"));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
