@@ -107,7 +107,7 @@ public class AnnouncementDAO {
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
             statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
-            statement.setBoolean(2, announcement.isActive());
+            statement.setBoolean(2, announcement.getActive());
             statement.setInt(3, announcement.getId());
             statement.execute();
             return true;
@@ -123,7 +123,7 @@ public class AnnouncementDAO {
             statement.setInt(1, announcement.getCarID());
             statement.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.setTimestamp(3, java.sql.Timestamp.valueOf(LocalDateTime.now()));
-            statement.setBoolean(4, announcement.isActive());
+            statement.setBoolean(4, announcement.getActive());
             statement.execute();
             return true;
         } catch (SQLException e) {
