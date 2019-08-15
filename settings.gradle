@@ -1,2 +1,6 @@
 rootProject.name = 'carannouncements'
+include ':entity'
+include ':controller'
+include ':service'
+include ':dao'
 
