@@ -1,3 +1,13 @@
+plugins{
+    id 'java'
+    id 'war'
+    id 'org.gretty' version '2.3.1'
+}
+
+dependencies {
+
+}
+
 allprojects {
     apply plugin: 'idea'
     apply plugin: 'java'
@@ -7,14 +17,41 @@ allprojects {
 
     repositories {
         mavenCentral()
+        flatDir{
+            /*dirs 'libs'
+            dirs '../libs'*/
+            dirs new File('libs').getAbsolutePath()
+        }
     }
 
     dependencies {
-
         testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
+        implementation name: 'entity'
     }
 
 }
 
-apply plugin: 'war'
-buildDir = '/custombuild'
+war {
+    /*webInf { from 'controller/build/classes/java/main' into 'classes/'}
+    webInf { from 'dao/build/classes/java/main' into 'classes/'}
+    webInf { from 'entity/build/classes/java/main' into 'classes/'}
+    webInf { from 'service/build/classes/java/main' into 'classes/'}*/
+
+    webXml = file('WEB-INF/web.xml')
+}
+
+dependencies {
+/*    compile project(':entity')
+    compile project(':dao')
+    compile project(':service')*/
+    compile project(':controller')
+}
+
+sourceSets{
+    main{
+        java{
+            srcDirs =
+                    ['controller/src/main/java']
+        }
+    }
+}
