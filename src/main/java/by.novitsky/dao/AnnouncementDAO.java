@@ -14,7 +14,7 @@ public class AnnouncementDAO {
     private static final String GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND = "SELECT * FROM announcement WHERE car_id =";
     private static final String GET_ANNOUNCEMENTS_BY_ID_SQL_COMMAND = "SELECT * FROM announcement WHERE id =";
     private static final String DELETE_ANNOUNCEMENT_BY_ID_SQL_COMMAND = "DELETE FROM announcement WHERE id =";
-    private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ?, is_active = ? WHERE id = ?";
+    private static final String CHANGE_ANNOUNCEMENT_SQL_COMMAND = "UPDATE announcement SET date_last_changed = ?, is_active = ?, car_id = ? WHERE id = ?";
     private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO announcement (car_id, date_created, date_last_changed, is_active) VALUES (?,?,?,?)";
 
 
@@ -109,7 +109,8 @@ public class AnnouncementDAO {
              PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
             statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.setBoolean(2, announcement.getActive());
-            statement.setInt(3, announcement.getId());
+            statement.setInt(3, announcement.getCarID());
+            statement.setInt(4, announcement.getId());
             statement.execute();
             return true;
         } catch (SQLException e) {
