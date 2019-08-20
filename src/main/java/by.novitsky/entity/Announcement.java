@@ -6,7 +6,7 @@ public class Announcement {
 
     private Integer id;
     private Integer carID;
-    private LocalDateTime dateCreated;
+    private LocalDateTime dateCreated = LocalDateTime.now();
     private LocalDateTime dateLastChanged;
     private Boolean isActive;
 
