@@ -1,9 +1,0 @@
-apply plugin: 'war'
-dependencies {
-    compile project(':service')
-    compile project(':dao')
-    implementation name: 'entity'
-
-
-
-}

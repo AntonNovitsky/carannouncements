@@ -1,5 +1,0 @@
-dependencies {
-    //implementation project(':entity')
-    implementation project(':dao')
-    implementation name: 'entity'
-}

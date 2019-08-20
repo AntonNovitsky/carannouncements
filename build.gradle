@@ -21,18 +21,13 @@ plugins{
         compile group: 'org.springframework', name: 'spring-core', version: '5.1.9.RELEASE'
         compile group: 'org.springframework', name: 'spring-context', version: '5.1.9.RELEASE'
         compile group: 'org.springframework', name: 'spring-expression', version: '5.1.9.RELEASE'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.3'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.9'
+        /*compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.3'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.9'*/
         compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
 
     }
 
 
 war {
-    /*webInf { from 'controller/build/classes/java/main' into 'classes/'}
-    webInf { from 'dao/build/classes/java/main' into 'classes/'}
-    webInf { from 'entity/build/classes/java/main' into 'classes/'}
-    webInf { from 'service/build/classes/java/main' into 'classes/'}*/
-
     webXml = file('WEB-INF/web.xml')
 }
