@@ -1,35 +1,32 @@
 plugins{
     id 'java'
     id 'war'
+    id 'idea'
     id 'org.gretty' version '2.3.1'
 }
-
-dependencies {
-
-}
-
-allprojects {
-    apply plugin: 'idea'
-    apply plugin: 'java'
-
 
     sourceCompatibility = 1.8
 
     repositories {
         mavenCentral()
-        flatDir{
-            /*dirs 'libs'
-            dirs '../libs'*/
-            dirs new File('libs').getAbsolutePath()
-        }
     }
 
     dependencies {
         testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
-        implementation name: 'entity'
+        providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+        compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-web', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-aop', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-beans', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-core', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-context', version: '5.1.9.RELEASE'
+        compile group: 'org.springframework', name: 'spring-expression', version: '5.1.9.RELEASE'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.3'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.9'
+        compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
+
     }
 
-}
 
 war {
     /*webInf { from 'controller/build/classes/java/main' into 'classes/'}
@@ -38,20 +35,4 @@ war {
     webInf { from 'service/build/classes/java/main' into 'classes/'}*/
 
     webXml = file('WEB-INF/web.xml')
-}
-
-dependencies {
-/*    compile project(':entity')
-    compile project(':dao')
-    compile project(':service')*/
-    compile project(':controller')
-}
-
-sourceSets{
-    main{
-        java{
-            srcDirs =
-                    ['controller/src/main/java']
-        }
-    }
 }
