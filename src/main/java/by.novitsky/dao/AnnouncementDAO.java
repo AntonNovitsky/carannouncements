@@ -104,7 +104,7 @@ public class AnnouncementDAO {
         return false;
     }
 
-    public boolean updateAnnouncement(Announcement announcement){
+    public Announcement updateAnnouncement(Announcement announcement){
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
             statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
@@ -112,14 +112,13 @@ public class AnnouncementDAO {
             statement.setInt(3, announcement.getCarID());
             statement.setInt(4, announcement.getId());
             statement.execute();
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return announcement;
     }
 
-    public boolean createAnnouncement(Announcement announcement){
+    public Announcement createAnnouncement(Announcement announcement){
         try (Connection connection =  DriverManager.getConnection(ConnectionParams.URL_PARAMS);
              PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL_COMMAND)) {
             statement.setInt(1, announcement.getCarID());
@@ -127,11 +126,10 @@ public class AnnouncementDAO {
             statement.setTimestamp(3, java.sql.Timestamp.valueOf(LocalDateTime.now()));
             statement.setBoolean(4, announcement.getActive());
             statement.execute();
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return announcement;
     }
 
 }

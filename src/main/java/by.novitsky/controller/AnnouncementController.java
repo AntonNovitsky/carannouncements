@@ -6,13 +6,19 @@ import by.novitsky.service.DeleteAnnouncement;
 import by.novitsky.service.GetAllAnnouncements;
 import by.novitsky.service.GetAnnouncement;
 import by.novitsky.service.UpdateAnnouncement;
+import by.novitsky.validation.IdValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -32,26 +38,36 @@ public class AnnouncementController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Object> getAnnouncement(@PathVariable Integer id){
+    @ResponseStatus(HttpStatus.OK)
+    public Announcement getAnnouncement(@PathVariable Integer id){
 
         Announcement announcement = new GetAnnouncement().service(id);
-        if (announcement == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);
-        } else {
-           return ResponseEntity.ok(announcement);
+        if (isNull(announcement)){
+            /*//First implementation
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
+            /*//Per exception
+            throw new AnnouncementNotFoundExceptionPerException();*/
+            /*//Per controller
+            throw new AnnouncementNotFoundExceptionPerController();*/
+            //Globally
+            throw new AnnouncementNotFoundGlobal();
         }
+
+        return announcement;
+
 
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<String> postAnnouncement(@RequestBody Announcement announcement){
+    @ResponseStatus(HttpStatus.OK)
+    public void postAnnouncement(@RequestBody Announcement announcement){
         new CreateAnnouncement().service(announcement);
-        return ResponseEntity.ok("");
     }
 
     @PutMapping(value = "/{id}")
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id){
         announcement.setId(id);
         new UpdateAnnouncement().service(announcement);
@@ -60,9 +76,26 @@ public class AnnouncementController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> deleteAnnouncement(@PathVariable Integer id){
         new DeleteAnnouncement().service(id);
         return ResponseEntity.ok("");
+    }
+
+    @ResponseStatus(value=HttpStatus.NOT_FOUND)
+    @ExceptionHandler(AnnouncementNotFoundExceptionPerController.class)
+    public void noSuchAnnouncement(HttpServletResponse resp) throws IOException {
+        resp.getWriter().println("Per controller: no such announcement");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public void typeMismatch(HttpServletResponse response) throws IOException {
+        response.getWriter().println("Bad request - id have to be of type Integer");
+    }
+
+    public static <T> Boolean isNull(T input){
+        return input == null;
     }
 
 }
