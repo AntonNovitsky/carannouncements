@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/announcements")
@@ -35,7 +37,7 @@ public class AnnouncementController {
   public Announcement getAnnouncement(@PathVariable Integer id) {
 
     Announcement announcement = new GetAnnouncement().service(id);
-    if (announcement == null) {
+    if (Optional.ofNullable(announcement).isPresent()) {
             /*//First implementation
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
             /*//Per exception
