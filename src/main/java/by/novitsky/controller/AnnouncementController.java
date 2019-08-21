@@ -35,7 +35,7 @@ public class AnnouncementController {
   public Announcement getAnnouncement(@PathVariable Integer id) {
 
     Announcement announcement = new GetAnnouncement().service(id);
-    if (isNull(announcement)) {
+    if (announcement == null) {
             /*//First implementation
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
             /*//Per exception
@@ -85,10 +85,6 @@ public class AnnouncementController {
   @ExceptionHandler(MethodArgumentTypeMismatchException.class)
   public void typeMismatch(HttpServletResponse response) throws IOException {
     response.getWriter().println("Bad request - id have to be of type Integer : ");
-  }
-
-  private static <T> Boolean isNull(T input) {
-    return input == null;
   }
 
 }
