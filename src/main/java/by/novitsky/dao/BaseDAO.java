@@ -1,6 +1,8 @@
 package by.novitsky.dao;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class BaseDAO {
@@ -17,6 +19,8 @@ public class BaseDAO {
   private String dbUrl;
   private String user;
   private String password;
+//ConfigurationManager.getProperty("path.page.login");
+
 
   private static BaseDAO baseDAO;
 
