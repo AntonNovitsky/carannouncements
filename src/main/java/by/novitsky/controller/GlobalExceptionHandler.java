@@ -11,10 +11,10 @@ import java.io.IOException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(AnnouncementNotFoundGlobal.class)
-    public void handle(HttpServletResponse response) throws IOException {
-        response.getWriter().println("Global: no such announcement");
-    }
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(AnnouncementNotFoundGlobal.class)
+  public void handle(HttpServletResponse response) throws IOException {
+    response.getWriter().println("Global: no such announcement");
+  }
 
 }

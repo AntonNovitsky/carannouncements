@@ -5,8 +5,8 @@ import by.novitsky.dao.AnnouncementDAO;
 
 public class DeleteAnnouncement {
 
-    public void service(int id){
-        new AnnouncementDAO().deleteAnnouncement(id);
-    }
+  public void service(int id) {
+    new AnnouncementDAO().deleteAnnouncement(id);
+  }
 
 }
