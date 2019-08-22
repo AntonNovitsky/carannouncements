@@ -1,43 +1,32 @@
 package by.novitsky.controller;
 
 import by.novitsky.entity.Announcement;
-import by.novitsky.service.CreateAnnouncement;
-import by.novitsky.service.DeleteAnnouncement;
-import by.novitsky.service.GetAllAnnouncements;
-import by.novitsky.service.GetAnnouncement;
-import by.novitsky.service.UpdateAnnouncement;
+import by.novitsky.service.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/announcements")
-@Validated
 public class AnnouncementController {
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseBody
+  @GetMapping
   public List<Announcement> allAnnouncements() {
     return new GetAllAnnouncements().service();
   }
 
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseBody
+  @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Announcement getAnnouncement(@PathVariable Integer id) {
 
     Announcement announcement = new GetAnnouncement().service(id);
-    if (Optional.ofNullable(announcement).isPresent()) {
+    if (!Optional.ofNullable(announcement).isPresent()) {
             /*//First implementation
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
             /*//Per exception
@@ -54,14 +43,12 @@ public class AnnouncementController {
   }
 
   @PostMapping
-  @ResponseBody
   @ResponseStatus(HttpStatus.OK)
   public void postAnnouncement(@RequestBody Announcement announcement) {
     new CreateAnnouncement().service(announcement);
   }
 
   @PutMapping(value = "/{id}")
-  @ResponseBody
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<String> updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
     announcement.setId(id);
@@ -70,7 +57,6 @@ public class AnnouncementController {
   }
 
   @DeleteMapping(value = "/{id}")
-  @ResponseBody
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<String> deleteAnnouncement(@PathVariable Integer id) {
     new DeleteAnnouncement().service(id);
