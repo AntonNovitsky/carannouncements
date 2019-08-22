@@ -3,9 +3,7 @@ package by.novitsky.controller;
 import by.novitsky.entity.Announcement;
 import by.novitsky.service.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -44,23 +42,25 @@ public class AnnouncementController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
-  public void postAnnouncement(@RequestBody Announcement announcement) {
+  public Announcement postAnnouncement(@RequestBody Announcement announcement) {
     new CreateAnnouncement().service(announcement);
+    return new GetAnnouncement().service(announcement.getId());
   }
 
   @PutMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<String> updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
+  public Announcement updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
     announcement.setId(id);
     new UpdateAnnouncement().service(announcement);
-    return ResponseEntity.ok("");
+    return new GetAnnouncement().service(id);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<String> deleteAnnouncement(@PathVariable Integer id) {
+  public Announcement deleteAnnouncement(@PathVariable Integer id) {
+    Announcement result = new GetAnnouncement().service(id);
     new DeleteAnnouncement().service(id);
-    return ResponseEntity.ok("");
+    return result;
   }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
@@ -70,7 +70,7 @@ public class AnnouncementController {
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+  @ExceptionHandler(NumberFormatException.class)
   public void typeMismatch(HttpServletResponse response) throws IOException {
     response.getWriter().println("Bad request - id have to be of type Integer : ");
   }
