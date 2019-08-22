@@ -1,6 +1,7 @@
 package by.novitsky.dao;
 
 
+import by.novitsky.cofiguration.ConfigurationManager;
 import by.novitsky.entity.Phone;
 
 import java.sql.*;
@@ -22,7 +23,7 @@ public class PhoneDAO {
   public List<Phone> getUserPhones(int userID) {
     List<Phone> result = new ArrayList<>();
 
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_USER_PHONES_SQL_COMMAND + userID)) {
       if (!rs.isBeforeFirst()) {
@@ -43,7 +44,7 @@ public class PhoneDAO {
 
   public Phone getPhone(int id) {
     Phone result = new Phone();
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_PHONE_BY_ID_SQL_COMMAND + id)) {
       if (!rs.isBeforeFirst()) {
@@ -61,7 +62,7 @@ public class PhoneDAO {
   }
 
   public boolean deletePhone(int id) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement()) {
       statement.execute(DELETE_PHONE_BY_ID_SQL_COMMAND + id);
       return true;
@@ -72,7 +73,7 @@ public class PhoneDAO {
   }
 
   public boolean updatePhone(Phone phone) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CHANGE_PHONE_SQL_COMMAND)) {
       statement.setString(1, phone.getNumber());
       statement.setInt(2, phone.getId());
@@ -85,7 +86,7 @@ public class PhoneDAO {
   }
 
   public boolean createPhone(Phone phone) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CREATE_PHONE_SQL_COMMAND)) {
       statement.setInt(1, phone.getUserID());
       statement.setString(2, phone.getNumber());

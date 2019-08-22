@@ -1,6 +1,7 @@
 package by.novitsky.dao;
 
 
+import by.novitsky.cofiguration.ConfigurationManager;
 import by.novitsky.entity.Announcement;
 import by.novitsky.entity.Car;
 import by.novitsky.entity.Condition;
@@ -26,7 +27,7 @@ public class CarDAO {
   public List<Car> getAllUserCars(int userID) {
     ArrayList<Car> result = new ArrayList<>();
 
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_ALL_USER_CARS_SQL_COMMAND + userID)) {
       if (!rs.isBeforeFirst()) {
@@ -45,7 +46,7 @@ public class CarDAO {
   }
 
   public boolean deleteCar(int id) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement()) {
       statement.execute(DELETE_CAR_BY_ID_SQL_COMMAND + id);
       return true;
@@ -57,7 +58,7 @@ public class CarDAO {
 
   public Car getCar(int id) {
     Car result = new Car();
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_CAR_BY_ID_SQL_COMMAND + id)) {
       if (!rs.isBeforeFirst()) {
@@ -82,7 +83,7 @@ public class CarDAO {
   }
 
   public boolean updateCar(Car car) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CHANGE_CAR_SQL_COMMAND)) {
       statement.setInt(1, car.getYearOfProduction());
       statement.setString(2, car.getBrand());
@@ -104,7 +105,7 @@ public class CarDAO {
   }
 
   public boolean createCar(Car car) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CREATE_CAR_SQL_COMMAND)) {
       statement.setInt(1, car.getYearOfProduction());
       statement.setString(2, car.getBrand());

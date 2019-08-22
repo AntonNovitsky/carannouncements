@@ -1,6 +1,7 @@
 package by.novitsky.dao;
 
 
+import by.novitsky.cofiguration.ConfigurationManager;
 import by.novitsky.entity.User;
 
 import java.sql.*;
@@ -21,7 +22,7 @@ public class UserDAO {
   public List<User> getAllUsers() {
     List<User> result = new ArrayList<>();
 
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_ALL_USERS_SQL_COMMAND)) {
       if (!rs.isBeforeFirst()) {
@@ -40,7 +41,7 @@ public class UserDAO {
 
   public User getUser(int id) {
     User result = new User();
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_USER_BY_ID_SQL_COMMAND + id)) {
       if (!rs.isBeforeFirst()) {
@@ -58,7 +59,7 @@ public class UserDAO {
   }
 
   public boolean deleteUser(int id) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement()) {
       statement.execute(DELETE_USER_BY_ID_SQL_COMMAND + id);
       return true;
@@ -69,7 +70,7 @@ public class UserDAO {
   }
 
   public boolean updateUser(User user) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CHANGE_USER_SQL_COMMAND)) {
       statement.setString(1, user.getName());
       statement.setInt(2, user.getId());
@@ -82,7 +83,7 @@ public class UserDAO {
   }
 
   public boolean createUser(User user) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL_COMMAND)) {
       statement.setString(1, user.getName());
       statement.execute();

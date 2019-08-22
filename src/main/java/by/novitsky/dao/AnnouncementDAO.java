@@ -1,6 +1,7 @@
 package by.novitsky.dao;
 
 
+import by.novitsky.cofiguration.ConfigurationManager;
 import by.novitsky.entity.Announcement;
 
 import java.sql.*;
@@ -24,7 +25,7 @@ public class AnnouncementDAO {
   public List<Announcement> getAllAnnouncements() {
     ArrayList<Announcement> result = new ArrayList<>();
 
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_ALL_ANNOUNCEMENTS_SQL_COMMAND)) {
       if (!rs.isBeforeFirst()) {
@@ -50,7 +51,7 @@ public class AnnouncementDAO {
   public List<Announcement> getAllAnnouncements(int carID) {
     ArrayList<Announcement> result = new ArrayList<>();
 
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_ALL_CAR_ANNOUNCEMENTS_SQL_COMMAND + carID)) {
       if (!rs.isBeforeFirst()) {
@@ -74,7 +75,7 @@ public class AnnouncementDAO {
 
   public Announcement getAnnouncement(int id) {
     Announcement result = new Announcement();
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement();
          ResultSet rs = statement.executeQuery(GET_ANNOUNCEMENTS_BY_ID_SQL_COMMAND + id)) {
       if (!rs.isBeforeFirst()) {
@@ -94,7 +95,7 @@ public class AnnouncementDAO {
   }
 
   public boolean deleteAnnouncement(int id) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement()) {
       statement.execute(DELETE_ANNOUNCEMENT_BY_ID_SQL_COMMAND + id);
       return true;
@@ -105,9 +106,9 @@ public class AnnouncementDAO {
   }
 
   public Announcement updateAnnouncement(Announcement announcement) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CHANGE_ANNOUNCEMENT_SQL_COMMAND)) {
-      statement.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+      statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
       statement.setBoolean(2, announcement.getActive());
       statement.setInt(3, announcement.getCarID());
       statement.setInt(4, announcement.getId());
@@ -119,11 +120,11 @@ public class AnnouncementDAO {
   }
 
   public Announcement createAnnouncement(Announcement announcement) {
-    try (Connection connection = DriverManager.getConnection(BaseDAO.getUrlParams());
+    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL_COMMAND)) {
       statement.setInt(1, announcement.getCarID());
-      statement.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
-      statement.setTimestamp(3, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+      statement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+      statement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
       statement.setBoolean(4, announcement.getActive());
       statement.execute();
     } catch (SQLException e) {
