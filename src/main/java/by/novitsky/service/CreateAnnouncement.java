@@ -6,8 +6,8 @@ import by.novitsky.dao.AnnouncementDAO;
 
 public class CreateAnnouncement {
 
-  public void service(Announcement announcement) {
-    new AnnouncementDAO().createAnnouncement(announcement);
+  public Announcement service(Announcement announcement) {
+    return new AnnouncementDAO().createAnnouncement(announcement);
   }
 
 }

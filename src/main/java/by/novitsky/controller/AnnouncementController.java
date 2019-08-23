@@ -2,9 +2,13 @@ package by.novitsky.controller;
 
 import by.novitsky.entity.Announcement;
 import by.novitsky.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -14,8 +18,11 @@ import java.util.Optional;
 @RequestMapping("/announcements")
 public class AnnouncementController {
 
+  private Logger logger = LoggerFactory.getLogger(AnnouncementController.class);
+
   @GetMapping
-  public List<Announcement> allAnnouncements() {
+  public List<Announcement> allAnnouncements(HttpServletRequest request) {
+    logger.info("GetAllAnnouncements : " + request.getRemoteAddr());
     return new GetAllAnnouncements().service();
   }
 
@@ -43,24 +50,20 @@ public class AnnouncementController {
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
   public Announcement postAnnouncement(@RequestBody Announcement announcement) {
-    new CreateAnnouncement().service(announcement);
-    return new GetAnnouncement().service(announcement.getId());
+    return new CreateAnnouncement().service(announcement);
   }
 
   @PutMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Announcement updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
     announcement.setId(id);
-    new UpdateAnnouncement().service(announcement);
-    return new GetAnnouncement().service(id);
+    return new UpdateAnnouncement().service(announcement);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Announcement deleteAnnouncement(@PathVariable Integer id) {
-    Announcement result = new GetAnnouncement().service(id);
-    new DeleteAnnouncement().service(id);
-    return result;
+    return new DeleteAnnouncement().service(id);
   }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
@@ -70,9 +73,10 @@ public class AnnouncementController {
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler(NumberFormatException.class)
-  public void typeMismatch(HttpServletResponse response) throws IOException {
-    response.getWriter().println("Bad request - id have to be of type Integer : ");
+  @ExceptionHandler(TypeMismatchException.class)
+  public void numberFormatExceptionHandler(HttpServletResponse response, Exception exception) throws IOException {
+    response.getWriter().println(exception.getMessage() + " " + exception.getClass());
+    exception.printStackTrace();
   }
 
 }

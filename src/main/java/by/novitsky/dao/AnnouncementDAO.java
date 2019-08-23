@@ -94,15 +94,16 @@ public class AnnouncementDAO {
     return result;
   }
 
-  public boolean deleteAnnouncement(int id) {
+  public Announcement deleteAnnouncement(int id) {
+    Announcement result = new Announcement();
     try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
          Statement statement = connection.createStatement()) {
+      result = getAnnouncement(id);
       statement.execute(DELETE_ANNOUNCEMENT_BY_ID_SQL_COMMAND + id);
-      return true;
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return false;
+    return result;
   }
 
   public Announcement updateAnnouncement(Announcement announcement) {

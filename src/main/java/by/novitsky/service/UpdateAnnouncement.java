@@ -5,8 +5,8 @@ import by.novitsky.entity.Announcement;
 
 public class UpdateAnnouncement {
 
-  public void service(Announcement announcement) {
-    new AnnouncementDAO().updateAnnouncement(announcement);
+  public Announcement service(Announcement announcement) {
+    return new AnnouncementDAO().updateAnnouncement(announcement);
   }
 
 }
