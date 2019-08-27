@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet id="1" author="Novitsky">
+        <comment>New announcement created with id = 1</comment>
+        <sql>
+            DROP TABLE IF EXISTS car_user;
+            CREATE TABLE IF NOT EXISTS car_user(
+            id serial PRIMARY KEY,
+            name VARCHAR(50) NOT NULL
+            );
+
+            DROP TABLE IF EXISTS car;
+            CREATE TABLE IF NOT EXISTS car(
+            id serial PRIMARY KEY,
+            user_id INTEGER,
+            year_of_production INTEGER NOT NULL,
+            brand VARCHAR(50) NOT NULL,
+            model VARCHAR(50) NOT NULL,
+            engine_capacity INTEGER,
+            condition VARCHAR(10) NOT NULL,
+            mileage INTEGER,
+            engine_power INTEGER,
+            FOREIGN KEY (user_id) REFERENCES car_user (id) ON DELETE CASCADE
+            );
+
+            DROP TABLE IF EXISTS phone;
+            CREATE TABLE IF NOT EXISTS phone(
+            id serial PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            number VARCHAR (20) NOT NULL UNIQUE,
+            FOREIGN KEY (user_id) REFERENCES car_user (id) ON DELETE CASCADE
+            );
+
+            DROP TABLE IF EXISTS announcement;
+            CREATE TABLE IF NOT EXISTS announcement(
+            id serial PRIMARY KEY,
+            car_id INTEGER  NOT NULL,
+            date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            date_last_changed TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            is_active BOOLEAN NOT NULL DEFAULT TRUE,
+            FOREIGN KEY (car_id) REFERENCES car (id) ON DELETE CASCADE
+            );
+        </sql>
+        <rollback>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

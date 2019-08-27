@@ -2,8 +2,6 @@ package by.novitsky.controller;
 
 import by.novitsky.entity.Announcement;
 import by.novitsky.service.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +16,15 @@ import java.util.Optional;
 @RequestMapping("/announcements")
 public class AnnouncementController {
 
-  private Logger logger = LoggerFactory.getLogger(AnnouncementController.class);
-
   @GetMapping
   public List<Announcement> allAnnouncements(HttpServletRequest request) {
-    logger.info("GetAllAnnouncements : " + request.getRemoteAddr());
-    return new GetAllAnnouncements().service();
+    List<Announcement> result = new GetAllAnnouncements().service();
+    return result;
   }
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Announcement getAnnouncement(@PathVariable Integer id) {
-
     Announcement announcement = new GetAnnouncement().service(id);
     if (!Optional.ofNullable(announcement).isPresent()) {
             /*//First implementation

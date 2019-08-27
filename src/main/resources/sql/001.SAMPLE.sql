@@ -1,1 +1,0 @@
-INSERT INTO announcement (car_id, is_active) VALUES (1, false);

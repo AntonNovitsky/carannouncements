@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet id="2" author="Novitsky">
+        <comment>New announcement created with id = 1</comment>
+        <sql>
+            INSERT INTO public.car_user (name) VALUES ('FirstUser');
+            INSERT INTO public.car_user (name) VALUES ('Someone');
+            INSERT INTO public.car_user (name) VALUES ('Increment');
+            INSERT INTO public.car_user (name) VALUES ('NameTest');
+            INSERT INTO public.car_user (name) VALUES ('NewUser');
+
+            INSERT INTO public.phone (user_id, number) VALUES (1, '+375297000000');
+            INSERT INTO public.phone (user_id, number) VALUES (1, '+375330000000');
+            INSERT INTO public.phone (user_id, number) VALUES (2, '+33453460000');
+
+            INSERT INTO public.car (user_id, year_of_production, brand, model, engine_capacity, condition, mileage, engine_power) VALUES (1, 2003, 'NewBrand', 'Model', 1200, 'NEW', 150, 21);
+            INSERT INTO public.car (user_id, year_of_production, brand, model, engine_capacity, condition, mileage, engine_power) VALUES (2, 1999, 'OtherBrand', 'Mod', 900, 'USED', 0, 850);
+            INSERT INTO public.car (user_id, year_of_production, brand, model, engine_capacity, condition, mileage, engine_power) VALUES (1, 1995, 'CarBrand', 'CarModel', 1500, 'NEW', 12000, 17);
+
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-14 17:05:37.721790', '2019-08-14 17:05:37.721790', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-15 10:54:24.359000', '2019-08-15 10:54:24.360000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-19 15:48:31.369000', '2019-08-19 15:48:31.370000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-19 15:50:22.357000', '2019-08-19 15:50:22.357000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-20 10:42:05.227000', '2019-08-20 10:42:05.228000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-20 10:42:12.496000', '2019-08-20 10:42:12.496000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (2, '2019-08-20 11:11:25.777000', '2019-08-20 11:11:25.780000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-20 11:17:38.879000', '2019-08-20 12:16:39.989000', true);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-23 09:41:56.782790', '2019-08-23 09:41:56.782790', false);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-23 10:35:59.374256', '2019-08-23 10:35:59.374256', false);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-23 12:14:32.143447', '2019-08-23 12:14:32.143447', false);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-27 09:29:37.484980', '2019-08-27 09:29:37.484980', false);
+            INSERT INTO public.announcement (car_id, date_created, date_last_changed, is_active) VALUES (1, '2019-08-27 09:29:37.494980', '2019-08-27 09:29:37.494980', false);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
