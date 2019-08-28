@@ -16,7 +16,7 @@ public class ConfigurationManager {
   public static final String URL_PATH_CONCAT_USER = "?user=";
   public static final String URL_PATH_CONCAT_PASSWORD = "&password=";
 
-  static{
+  static {
     YamlPropertiesFactoryBean applicationProperties = new YamlPropertiesFactoryBean();
     applicationProperties.setResources(new ClassPathResource("application.yaml"));
     properties = applicationProperties.getObject();
@@ -30,7 +30,7 @@ public class ConfigurationManager {
     //return resourceBundle.getString(key);
   }
 
-  public static String getUrl(){
+  public static String getUrl() {
     return new StringBuffer()
         .append(getProperty(DB_URL))
         .append(URL_PATH_CONCAT_USER)

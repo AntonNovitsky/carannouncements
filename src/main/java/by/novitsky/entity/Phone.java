@@ -1,9 +1,19 @@
 package by.novitsky.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "phone")
 public class Phone {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private Integer userID;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
+  private User user;
+
   private String number;
 
   public Integer getId() {
@@ -14,12 +24,12 @@ public class Phone {
     this.id = id;
   }
 
-  public Integer getUserID() {
-    return userID;
+  public User getUser() {
+    return user;
   }
 
-  public void setUserID(Integer userID) {
-    this.userID = userID;
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public String getNumber() {
@@ -34,7 +44,7 @@ public class Phone {
   public String toString() {
     return "Phone{" +
         "id=" + id +
-        ", userID=" + userID +
+        ", user=" + user.getName() +
         ", number='" + number + '\'' +
         '}';
   }

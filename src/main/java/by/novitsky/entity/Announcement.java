@@ -1,13 +1,27 @@
 package by.novitsky.entity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "announcement")
 public class Announcement {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private Integer carID;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "car_id")
+  private Car car;
+
+  @Column(name = "date_created")
   private LocalDateTime dateCreated = LocalDateTime.now();
+
+  @Column(name = "date_last_changed")
   private LocalDateTime dateLastChanged;
+
+  @Column(name = "is_active")
   private Boolean isActive = true;
 
   public Integer getId() {
@@ -18,12 +32,12 @@ public class Announcement {
     this.id = id;
   }
 
-  public Integer getCarID() {
-    return carID;
+  public Car getCar() {
+    return car;
   }
 
-  public void setCarID(Integer carID) {
-    this.carID = carID;
+  public void setCar(Car car) {
+    this.car = car;
   }
 
   public LocalDateTime getDateCreated() {
@@ -50,15 +64,5 @@ public class Announcement {
     isActive = active;
   }
 
-  @Override
-  public String toString() {
-    return "Announcement{" +
-        "id=" + id +
-        ", carID=" + carID +
-        ", dateCreated=" + dateCreated +
-        ", dateLastChanged=" + dateLastChanged +
-        ", isActive=" + isActive +
-        '}';
-  }
 }
 

@@ -5,7 +5,7 @@ import java.util.List;
 public interface DataAccessObject<T> {
 
   List<T> getAll();
-  T get(T input);
+  T get(Integer input);
   T update(T input);
   T create(T input);
   T delete(T input);

@@ -1,5 +1,6 @@
 package by.novitsky.controller;
 
+import by.novitsky.dto.AnnouncementDTO;
 import by.novitsky.entity.Announcement;
 import by.novitsky.service.*;
 import org.springframework.beans.TypeMismatchException;
@@ -17,15 +18,15 @@ import java.util.Optional;
 public class AnnouncementController {
 
   @GetMapping
-  public List<Announcement> allAnnouncements(HttpServletRequest request) {
-    List<Announcement> result = new GetAllAnnouncements().service();
+  public List<AnnouncementDTO> allAnnouncements(HttpServletRequest request) {
+    List<AnnouncementDTO> result = new GetAllAnnouncements().service();
     return result;
   }
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Announcement getAnnouncement(@PathVariable Integer id) {
-    Announcement announcement = new GetAnnouncement().service(id);
+  public AnnouncementDTO getAnnouncement(@PathVariable Integer id) {
+    AnnouncementDTO announcement = new GetAnnouncement().service(id);
     if (!Optional.ofNullable(announcement).isPresent()) {
             /*//First implementation
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
@@ -44,20 +45,20 @@ public class AnnouncementController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
-  public Announcement postAnnouncement(@RequestBody Announcement announcement) {
+  public AnnouncementDTO postAnnouncement(@RequestBody Announcement announcement) {
     return new CreateAnnouncement().service(announcement);
   }
 
   @PutMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Announcement updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
+  public AnnouncementDTO updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
     announcement.setId(id);
     return new UpdateAnnouncement().service(announcement);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Announcement deleteAnnouncement(@PathVariable Integer id) {
+  public AnnouncementDTO deleteAnnouncement(@PathVariable Integer id) {
     return new DeleteAnnouncement().service(id);
   }
 

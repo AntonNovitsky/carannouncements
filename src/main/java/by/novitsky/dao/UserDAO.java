@@ -1,97 +1,47 @@
 package by.novitsky.dao;
 
-
-import by.novitsky.cofiguration.ConfigurationManager;
 import by.novitsky.entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements DataAccessObject<User> {
 
-  private static final String GET_ALL_USERS_SQL_COMMAND = "SELECT * FROM car_user";
-  private static final String GET_USER_BY_ID_SQL_COMMAND = "SELECT * FROM car_user WHERE id = ";
-  private static final String DELETE_USER_BY_ID_SQL_COMMAND = "DELETE FROM car_user WHERE id = ";
-  private static final String CREATE_USER_SQL_COMMAND = "INSERT INTO car_user (name) VALUES (?)";
-  private static final String CHANGE_USER_SQL_COMMAND = "UPDATE car_user SET name = ? WHERE id = ?";
-
-  public UserDAO() {
+  public List<User> getAll(){
+    return (List<User>) HibernateSessionFactory.getSessionFactory().openSession().createQuery("From User").list();
   }
 
-  public List<User> getAllUsers() {
-    List<User> result = new ArrayList<>();
-
-    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
-         Statement statement = connection.createStatement();
-         ResultSet rs = statement.executeQuery(GET_ALL_USERS_SQL_COMMAND)) {
-      if (!rs.isBeforeFirst()) {
-        return null;
-      }
-      while (rs.next()) {
-        User tempUser = new User();
-        int id = rs.getInt("id");
-        result.add(this.getUser(id));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return result;
+  public User get(Integer id){
+    return HibernateSessionFactory.getSessionFactory().openSession().get(User.class, id);
   }
 
-  public User getUser(int id) {
-    User result = new User();
-    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
-         Statement statement = connection.createStatement();
-         ResultSet rs = statement.executeQuery(GET_USER_BY_ID_SQL_COMMAND + id)) {
-      if (!rs.isBeforeFirst()) {
-        return null;
-      }
-      rs.next();
-      result.setId(id);
-      result.setName(rs.getString("name"));
-      result.setPhones(new PhoneDAO().getUserPhones(id));
-      result.setCars(new CarDAO().getAllUserCars(id));
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return result;
+  public User create(User user){
+    Session session = HibernateSessionFactory.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+    session.save(user);
+    transaction.commit();
+    session.close();
+    return get(user.getId());
   }
 
-  public boolean deleteUser(int id) {
-    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
-         Statement statement = connection.createStatement()) {
-      statement.execute(DELETE_USER_BY_ID_SQL_COMMAND + id);
-      return true;
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return false;
+  public User update(User user){
+    Session session = HibernateSessionFactory.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+    session.update(user);
+    transaction.commit();
+    session.close();
+    return get(user.getId());
   }
 
-  public boolean updateUser(User user) {
-    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
-         PreparedStatement statement = connection.prepareStatement(CHANGE_USER_SQL_COMMAND)) {
-      statement.setString(1, user.getName());
-      statement.setInt(2, user.getId());
-      statement.execute();
-      return true;
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return false;
-  }
 
-  public boolean createUser(User user) {
-    try (Connection connection = DriverManager.getConnection(ConfigurationManager.getUrl());
-         PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL_COMMAND)) {
-      statement.setString(1, user.getName());
-      statement.execute();
-      return true;
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return false;
+  public User delete(User user){
+    Session session = HibernateSessionFactory.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+    session.delete(user);
+    transaction.commit();
+    session.close();
+    return user;
   }
 
 }

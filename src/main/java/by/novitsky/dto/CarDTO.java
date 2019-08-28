@@ -1,43 +1,36 @@
-package by.novitsky.entity;
+package by.novitsky.dto;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import by.novitsky.entity.Car;
+import by.novitsky.entity.Condition;
 
-import javax.persistence.*;
-import java.util.List;
+public class CarDTO {
 
-@Entity
-@Table(name = "car")
-public class Car {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "user_id")
-  private User user;
-
-  @Column(name = "year_of_production")
   private Integer yearOfProduction;
 
   private String brand;
   private String model;
 
-  @Column(name = "engine_capacity")
   private Integer engineCapacity;
 
-  @Enumerated(EnumType.STRING)
   private Condition condition;
 
   private Integer mileage;
 
-  @Column(name = "engine_power")
   private Integer enginePower;
 
-  @OneToMany
-  @JoinColumn(name = "car_id")
-  @LazyCollection(LazyCollectionOption.FALSE)
-  private List<Announcement> announcementList;
+
+  public CarDTO(Car car){
+    id = car.getId();
+    yearOfProduction = car.getYearOfProduction();
+    brand = car.getBrand();
+    model = car.getModel();
+    engineCapacity = car.getEngineCapacity();
+    condition = car.getCondition();
+    mileage = car.getMileage();
+    enginePower = car.getEnginePower();
+  }
 
   public Integer getId() {
     return id;
@@ -45,14 +38,6 @@ public class Car {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
   }
 
   public Integer getYearOfProduction() {
@@ -111,19 +96,10 @@ public class Car {
     this.enginePower = enginePower;
   }
 
-  public List<Announcement> getAnnouncementList() {
-    return announcementList;
-  }
-
-  public void setAnnouncementList(List<Announcement> announcementList) {
-    this.announcementList = announcementList;
-  }
-
   @Override
   public String toString() {
-    return "Car{" +
+    return "CarDTO{" +
         "id=" + id +
-        ", user=" + user.getName() +
         ", yearOfProduction=" + yearOfProduction +
         ", brand='" + brand + '\'' +
         ", model='" + model + '\'' +
@@ -131,7 +107,6 @@ public class Car {
         ", condition=" + condition +
         ", mileage=" + mileage +
         ", enginePower=" + enginePower +
-        ", announcementList=" + announcementList +
         '}';
   }
 }

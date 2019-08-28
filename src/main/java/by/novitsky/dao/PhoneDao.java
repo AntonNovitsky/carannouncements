@@ -1,25 +1,24 @@
 package by.novitsky.dao;
 
-import by.novitsky.entity.Car;
+import by.novitsky.entity.Phone;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class CarDAO implements DataAccessObject<Car> {
-
+public class PhoneDao implements DataAccessObject<Phone> {
   @Override
-  public List<Car> getAll() {
-    return (List<Car>) HibernateSessionFactory.getSessionFactory().openSession().createQuery("From Car").list();
+  public List<Phone> getAll() {
+    return (List<Phone>) HibernateSessionFactory.getSessionFactory().openSession().createQuery("From Phone").list();
   }
 
   @Override
-  public Car get(Integer input) {
-    return HibernateSessionFactory.getSessionFactory().openSession().get(Car.class, input);
+  public Phone get(Integer input) {
+    return HibernateSessionFactory.getSessionFactory().openSession().get(Phone.class, input);
   }
 
   @Override
-  public Car update(Car input) {
+  public Phone update(Phone input) {
     Session session = HibernateSessionFactory.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
     session.update(input);
@@ -29,7 +28,7 @@ public class CarDAO implements DataAccessObject<Car> {
   }
 
   @Override
-  public Car create(Car input) {
+  public Phone create(Phone input) {
     Session session = HibernateSessionFactory.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
     session.save(input);
@@ -39,7 +38,7 @@ public class CarDAO implements DataAccessObject<Car> {
   }
 
   @Override
-  public Car delete(Car input) {
+  public Phone delete(Phone input) {
     Session session = HibernateSessionFactory.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
     session.delete(input);
