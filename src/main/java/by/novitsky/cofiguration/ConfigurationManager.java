@@ -5,9 +5,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.util.Properties;
 
-
 public class ConfigurationManager {
-
   private final static Properties properties;
 
   public static final String DB_URL = "spring.datasource.url";
@@ -22,12 +20,14 @@ public class ConfigurationManager {
     properties = applicationProperties.getObject();
   }
 
-  private ConfigurationManager() {
+  private ConfigurationManager(){
+
   }
 
   public static String getProperty(String key) {
+
     return properties.getProperty(key);
-    //return resourceBundle.getString(key);
+
   }
 
   public static String getUrl() {

@@ -16,7 +16,7 @@ public class Announcement {
   private Car car;
 
   @Column(name = "date_created")
-  private LocalDateTime dateCreated = LocalDateTime.now();
+  private LocalDateTime dateCreated;
 
   @Column(name = "date_last_changed")
   private LocalDateTime dateLastChanged;
@@ -64,5 +64,15 @@ public class Announcement {
     isActive = active;
   }
 
+  @Override
+  public String toString() {
+    return "Announcement{" +
+        "id=" + id +
+        ", car=" + car.getId() +
+        ", dateCreated=" + dateCreated +
+        ", dateLastChanged=" + dateLastChanged +
+        ", isActive=" + isActive +
+        '}';
+  }
 }
 

@@ -1,69 +1,21 @@
 package by.novitsky.controller;
 
-import by.novitsky.dto.AnnouncementDTO;
 import by.novitsky.entity.Announcement;
-import by.novitsky.service.*;
+import by.novitsky.service.NewGetAnnouncement;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/announcements")
 public class AnnouncementController {
 
-  @GetMapping
-  public List<AnnouncementDTO> allAnnouncements(HttpServletRequest request) {
-    List<AnnouncementDTO> result = new GetAllAnnouncements().service();
-    return result;
-  }
-
-  @GetMapping("/{id}")
-  @ResponseStatus(HttpStatus.OK)
-  public AnnouncementDTO getAnnouncement(@PathVariable Integer id) {
-    AnnouncementDTO announcement = new GetAnnouncement().service(id);
-    if (!Optional.ofNullable(announcement).isPresent()) {
-            /*//First implementation
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ANNOUNCEMENT_NOT_FOUND);*/
-            /*//Per exception
-            throw new AnnouncementNotFoundExceptionPerException();*/
-            /*//Per controller
-            throw new AnnouncementNotFoundExceptionPerController();*/
-      //Globally
-      throw new AnnouncementNotFoundGlobal();
-    }
-
-    return announcement;
-
-
-  }
-
-  @PostMapping
-  @ResponseStatus(HttpStatus.OK)
-  public AnnouncementDTO postAnnouncement(@RequestBody Announcement announcement) {
-    return new CreateAnnouncement().service(announcement);
-  }
-
-  @PutMapping(value = "/{id}")
-  @ResponseStatus(HttpStatus.OK)
-  public AnnouncementDTO updateAnnouncement(@RequestBody Announcement announcement, @PathVariable Integer id) {
-    announcement.setId(id);
-    return new UpdateAnnouncement().service(announcement);
-  }
-
-  @DeleteMapping(value = "/{id}")
-  @ResponseStatus(HttpStatus.OK)
-  public AnnouncementDTO deleteAnnouncement(@PathVariable Integer id) {
-    return new DeleteAnnouncement().service(id);
-  }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  @ExceptionHandler(AnnouncementNotFoundExceptionPerController.class)
   public void noSuchAnnouncement(HttpServletResponse resp) throws IOException {
     resp.getWriter().println("Per controller: no such announcement");
   }
@@ -75,4 +27,15 @@ public class AnnouncementController {
     exception.printStackTrace();
   }
 
+  private final NewGetAnnouncement newGetAnnouncement;
+
+  @Autowired
+  public AnnouncementController(NewGetAnnouncement newGetAnnouncement) {
+    this.newGetAnnouncement = newGetAnnouncement;
+  }
+
+  @GetMapping("/mock")
+  public Announcement mock(){
+    return newGetAnnouncement.service(1);
+  }
 }
