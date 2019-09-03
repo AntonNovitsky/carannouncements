@@ -1,4 +1,4 @@
-package by.novitsky.controller;
+package by.novitsky;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
