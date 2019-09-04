@@ -1,19 +1,19 @@
 package by.novitsky.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "car")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Car {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
 
@@ -36,7 +36,8 @@ public class Car {
 
   @OneToMany
   @JoinColumn(name = "car_id")
-  @LazyCollection(LazyCollectionOption.FALSE)
+  //@LazyCollection(LazyCollectionOption.FALSE)
+  @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   private List<Announcement> announcementList;
 
   public Integer getId() {

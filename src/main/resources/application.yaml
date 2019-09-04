@@ -10,10 +10,19 @@ spring:
     url: jdbc:postgresql://localhost:5432/carsforsale
     username: postgres
     password: root
-    timeout: 234
   jpa:
     properties:
       hibernate:
         show-sql: false
+        format-sql: false
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        cache:
+          region:
+            factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+          use_second_level_cache: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
