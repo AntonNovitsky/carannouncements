@@ -7,6 +7,8 @@ import by.novitsky.dto.AnnouncementDTORequest;
 import by.novitsky.entity.Announcement;
 import by.novitsky.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +38,8 @@ public class AnnouncementService {
   }
 
   public AnnouncementDTO get(Integer id){
-    Announcement announcement = repository.findById(id).orElseThrow(() -> new RuntimeException("no such announcement"));
+    Announcement announcement = repository.findById(id)
+        .orElseThrow(() -> new RuntimeException(this.getClass() + " : No such announcement"));
     return new AnnouncementDTO(announcement);
   }
 
@@ -67,6 +70,15 @@ public class AnnouncementService {
   public AnnouncementDTO delete(Integer id){
     AnnouncementDTO result = new AnnouncementDTO(repository.findById(id).orElse(new Announcement()));
     repository.deleteById(id);
+    return result;
+  }
+
+  public List<AnnouncementDTO> getPaginated(int page, int size){
+    Page<Announcement> pageObj = repository.findAll(PageRequest.of(page, size));
+    List<AnnouncementDTO> result = new ArrayList<>();
+    for(Announcement temp: pageObj){
+      result.add(new AnnouncementDTO(temp));
+    }
     return result;
   }
 
