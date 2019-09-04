@@ -3,6 +3,7 @@ package by.novitsky.controller;
 import by.novitsky.dto.AnnouncementDTO;
 import by.novitsky.dto.AnnouncementDTORequest;
 import by.novitsky.service.AnnouncementService;
+import by.novitsky.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class AnnouncementController {
 
 
-  private AnnouncementService announcementService;
+  private Service<AnnouncementDTO, AnnouncementDTORequest> announcementService;
 
   @Autowired
   public AnnouncementController(AnnouncementService announcementService) {

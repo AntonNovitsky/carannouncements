@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AnnouncementService {
+public class AnnouncementService implements by.novitsky.service.Service<AnnouncementDTO, AnnouncementDTORequest> {
 
   private AnnouncementRepository repository;
   private CarRepository carRepository;
